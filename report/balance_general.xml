@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--FORMATO DE LA PAGINA DEL REPORTE-->
+        <template id="template_balance_general">
+            <t t-call="report.html_container" t-att-style="editable and 'line-height:3; font-size: 130%; padding: 0px 30px 0px 30px; text-align: justify;'">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="font-size: 8pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+                        <table class="table table-bordered" style="border-style:solid;">
+                            <tr>
+                                <td colspan="4">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center" style="text-align:center">
+                                            <b><span t-field="o.company_name" /></b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center" style="text-align:center">
+                                            <b>BALANCE GENERAL DEL PERIODO <span t-field="o.period_name" /></b>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="background-color: #3385ff;">
+                                <td>CUENTA</td>
+                                <td style="margin-left:10px;">IMPORTE</td>
+                                <td>CUENTA</td>
+                                <td style="margin-left:10px;">IMPORTE</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>ACTIVO CIRCULANTE</b>
+                                    </center>
+                                </td>
+                                <td colspan="2" style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>PASIVO CIRCULANTE</b>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FONDO FIJO DE CAJA</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-01')[1]" /></td>
+                                <td>PROVEEDORES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-01-01')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>BANCOS E INVERSIONES</td>
+                                <td style="text-align: right;">
+                                    <t t-set="bancoeinversiones" t-value="o._balance_general('01H-1-01-02')[1]+o._balance_general('01H-1-01-03')[1]"/>
+                                    <span t-esc="bancoeinversiones" />
+                                </td>
+                                <td>ACREEDORES DIVERSOS</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-01-02')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>CUENTAS POR COBRAR A CLIENTES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-04')[1]" /></td>
+                                <td>CREDITOS BANCARIOS POR PAGAR</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-01-03')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>PRESTACIONES LABORALES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-05')[1]" /></td>
+                                <td>IMPUESTOS Y APORTACIONES POR PAGAR</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-01-04')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>DEUDORES DIVERSOS</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-06')[1]" /></td>
+                                <td>IVA TRASLADADO</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-01-05')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>IVA ACREDITABLE Y A FAVOR</td>
+                                <td style="text-align: right;">
+                                    <t t-set="ivaacreditableyafavor" t-value="o._balance_general('01H-1-01-08')[1]+o._balance_general('01H-1-01-09')[1]"/>
+                                    <span t-esc="ivaacreditableyafavor" />
+                                </td>
+                                <td>ANTICIPOS DE CLIENTES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-01-06')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>INVENTARIOS</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-11')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>ANTICIPOS A IMPUESTOS</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-10')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>ANTICIPOS A PROVEEDORES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-01-12')[1]" /></td>
+                            </tr>
+                            <tr style="background-color: #d9d9d9;">
+                                <td>
+                                    <center>
+                                        <b>TOTAL ACTIVO CIRCULANTE</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="totalactivocirculante" t-value="o._balance_general('01H-1-01-01')[1]+o._balance_general('01H-1-01-02')[1]+o._balance_general('01H-1-01-03')[1]+o._balance_general('01H-1-01-04')[1]+o._balance_general('01H-1-01-05')[1]+o._balance_general('01H-1-01-06')[1]+o._balance_general('01H-1-01-08')[1]+o._balance_general('01H-1-01-09')[1]+o._balance_general('01H-1-01-11')[1]+o._balance_general('01H-1-01-10')[1]+o._balance_general('01H-1-01-12')[1]"/>
+                                    <span t-esc="totalactivocirculante" />
+                                </td>
+                                <td>
+                                    <center>
+                                        <b>TOTAL PASIVO CIRCULANTE</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="totalpasivocirculante" t-value="o._balance_general('01H-2-01-01')[1]+o._balance_general('01H-2-01-02')[1]+o._balance_general('01H-2-01-03')[1]+o._balance_general('01H-2-01-04')[1]+o._balance_general('01H-2-01-05')[1]+o._balance_general('01H-2-01-06')[1]"/>
+                                    <span t-esc="totalpasivocirculante" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>ACTIVO FIJO</b>
+                                    </center>
+                                </td>
+                                <td colspan="2" style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>PASIVO DIFERIDO</b>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TERRENOS Y EDIFICIOS</td>
+                                <td style="text-align: right;">
+                                    <t t-set="terrenosyedificios" t-value="o._balance_general('01H-1-02-01-01')[1]+o._balance_general('01H-1-02-01-02')[1]"/>
+                                    <span t-esc="terrenosyedificios" />
+                                </td>
+                                <td>PASIVOS LABORALES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-2-03-01')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>EQUIPO DE OFICINA Y COMPUTO</td>
+                                <td style="text-align: right;">
+                                    <t t-set="equipooficinaycomputo" t-value="o._balance_general('01H-1-02-01-03')[1]+o._balance_general('01H-1-02-01-04')[1]"/>
+                                    <span t-esc="equipooficinaycomputo" />
+                                </td>
+                                <td style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>TOTAL PASIVO DIFERIDO</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right; background-color: #d9d9d9;"><span t-esc="o._balance_general('01H-2-03-01')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>EQUIPO DE TRANSPORTE Y AUTOMOVILES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-02-01-05')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>GRUAS Y EQUIPOS DE CARGA</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-02-01-06')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>MAQUINARIA Y EQUIPOS</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-02-01-07')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>OBRAS EN PROCESO</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-02-02')[1]" /></td>
+                            </tr>
+                            <tr style="background-color:#d9d9d9;">
+                                <td>
+                                    <center>
+                                        <b>TOTAL ACTIVO FIJO</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="totalactivofijo" t-value="o._balance_general('01H-1-02-01-01')[1]+o._balance_general('01H-1-02-01-02')[1]+o._balance_general('01H-1-02-01-03')[1]+o._balance_general('01H-1-02-01-04')[1]+o._balance_general('01H-1-02-01-05')[1]+o._balance_general('01H-1-02-01-06')[1]+o._balance_general('01H-1-02-01-07')[1]+o._balance_general('01H-1-02-02')[1]"/>
+                                    <span t-esc="totalactivofijo" />
+                                </td>
+                                <td>
+                                    <center>
+                                        <b>SUMA EL PASIVO</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="sumaelpasivo" t-value="o._balance_general('01H-2-01-01')[1]+o._balance_general('01H-2-01-02')[1]+o._balance_general('01H-2-01-03')[1]+o._balance_general('01H-2-01-04')[1]+o._balance_general('01H-2-01-05')[1]+o._balance_general('01H-2-01-06')[1]+o._balance_general('01H-2-03-01')[1]"/>
+                                    <span t-esc="sumaelpasivo" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>ACTIVO DIFERIDO</b>
+                                    </center>
+                                </td>
+                                <td colspan="2" style="background-color: #d9d9d9;">
+                                    <center>
+                                        <b>CAPITAL CONTABLE </b>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>IMPUESTOS A FAVOR</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-02-03')[1]" /></td>
+                                <td>CAPITAL SOCIAL POR APORTACION</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-3-01')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>SEGUROS POR AMORTIZAR</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-03')[1]" /></td>
+                                <td>ACTUALIZACION DE CAPITAL POR APORTACION</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-3-02')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td>DEPOSITOS EN GARANTIA</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-1-02-04')[1]" /></td>
+                                <td>RESULTADOS DE EJERCICIOS ANTERIORES</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-3-03')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>RESULTADOS POR ACTUALIZACION</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-3-05')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>RESERVA LEGAL</td>
+                                <td style="text-align: right;"><span t-esc="o._balance_general('01H-3-04')[1]" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>UTILIDAD ( PERDIDA ) DEL EJERCICIO</td>
+                                <td>
+                                    <t t-set="utilidaddelejercicio" t-value="o._balance_general('01H-6')[1]-o._balance_general('01H-7')[1]"/>
+                                    <span t-esc="utilidaddelejercicio" />
+                                </td>
+                            </tr>
+                            <tr style="background-color:#d9d9d9;">
+                                <td>
+                                    <center>
+                                        <b>TOTAL ACTIVO DIFERIDO</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="totalactivodiferido" t-value="o._balance_general('01H-1-02-03')[1]+o._balance_general('01H-1-03')[1]+o._balance_general('01H-1-02-04')[1]"/>
+                                    <span t-esc="totalactivodiferido" />
+                                </td>
+                                <td>
+                                    <center>
+                                        <b>SUMA EL CAPITAL CONTABLE</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="sumaelcapitalcontable" t-value="o._balance_general('01H-3-01')[1]+o._balance_general('01H-3-02')[1]+o._balance_general('01H-3-03')[1]+o._balance_general('01H-3-05')[1]+o._balance_general('01H-3-04')[1]+(o._balance_general('01H-6')[1]-o._balance_general('01H-7')[1])"/>
+                                    <span t-esc="sumaelcapitalcontable" />
+                                </td>
+                            </tr>
+                            <tr style="background-color:#3385ff;">
+                                <td>
+                                    <center>
+                                        <b>SUMA EL ACTIVO</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <t t-set="totalactivodiferido" t-value="suma"/>
+                                    <span t-esc="totalactivodiferido" />
+                                </td>
+                                <td>
+                                    <center>
+                                        <b>SUMA PASIVO Y CAPITAL</b>
+                                    </center>
+                                </td>
+                                <td style="text-align: right;">
+                                    <!--t t-set="sumaelcapitalcontable" t-value="o._balance_general('')[1]"/>
+                                    <span t-esc="sumaelcapitalcontable" /-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report 
+            id="format_balance_general"
+            string="Balance General"
+            model="account.monthly_balance" 
+            report_type="qweb-pdf"
+            file="trabis_reportes_MX.template_balance_general" 
+            name="trabis_reportes_MX.template_balance_general"
+        />
+
+        <record id="paperformat_balance_general" model="report.paperformat">
+            <field name="name">Balance General</field>
+            <field name="format">custom</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(4, ref('format_balance_general'))]"/>
+        </record>
+
+    </data>
+</openerp>
