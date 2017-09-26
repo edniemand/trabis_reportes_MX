@@ -8,7 +8,7 @@
 			<field name="inherit_id" ref="argil_mx_accounting_reports_consol.view_account_monthly_balance_form"/>
 			<field name="arch" type="xml">
 				<xpath expr="/form/header/button[1]" position="after">
-					<button icon="gtk-execute" name="calculate" string="Reporte de Balance General" type="object" context="{'xls_export':1}" class="oe_highlight"/>
+					<button icon="gtk-execute" name="balance_general" string="Reporte de Balance General" type="object" context="{'xls_export':1}" class="oe_highlight"/>
 					<button icon="gtk-execute" name="estado_resultados" string="Reporte de Estado de Resultados" type="object" context="{'xls_export':1}" class="oe_highlight"/>
 				</xpath>
 				<xpath expr="/form/sheet/group/field[@name='ending_balance']" position="after">

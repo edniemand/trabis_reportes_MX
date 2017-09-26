@@ -14,7 +14,6 @@
     'depends': ['base','account','argil_mx_accounting_reports_consol'],
     'data': [
         'security/ir.model.access.csv',
-        #'report/balance_general.xml',
         'balance_general_view.xml',
     ],
     'installable': True,
